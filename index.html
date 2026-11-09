@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Findly | Campus Lost & Found</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --navy: #14243b;
+  --blue: #4263eb;
+  --cream: #f7f8fc;
+  --muted: #788397;
+  --white: #ffffff;
+  --border: #e8ebf2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+}
+
+header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 19px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span { color: var(--blue); }
+
+.header-tag {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 55px 24px;
+}
+
+.hero {
+  background: var(--navy);
+  color: white;
+  border-radius: 22px;
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  overflow: hidden;
+}
+
+.eyebrow {
+  color: #a9baff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(35px, 5vw, 53px);
+  line-height: 1.13;
+  max-width: 570px;
+}
+
+.hero p {
+  color: #c0cada;
+  margin-top: 15px;
+  max-width: 470px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.hero-icon {
+  font-size: 105px;
+  opacity: .95;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 25px 0 42px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 23px;
+  border-radius: 15px;
+}
+
+.stat .number {
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.stat p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 19px;
+  gap: 12px;
+}
+
+.section-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+}
+
+.section-heading p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 23px;
+  align-items: start;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 23px;
+}
+
+.panel h3 {
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 15px 0 7px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fafbfe;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  color: var(--navy);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--blue);
+  background: white;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 83px;
+}
+
+.primary-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 13px 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.primary-btn:hover { background: #304fd0; }
+
+.submit-btn { width: 100%; margin-top: 20px; }
+
+.items-area { min-width: 0; }
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 17px;
+  flex-wrap: wrap;
+}
+
+.search { flex: 1; min-width: 150px; }
+
+.filters {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.filter {
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 30px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.filter.active {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.item-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 18px;
+  transition: .2s;
+}
+
+.item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px #14243b0d;
+}
+
+.item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.item-emoji { font-size: 31px; }
+
+.status {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 30px;
+}
+
+.status.lost { background: #fff0ed; color: #d65b48; }
+.status.found { background: #e9f8ef; color: #24864d; }
+
+.item-card h4 {
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+
+.description {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  min-height: 38px;
+  overflow-wrap: anywhere;
+}
+
+.item-meta {
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding-top: 12px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.contact {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.delete-btn {
+  border: none;
+  background: #fff0ed;
+  color: #c65343;
+  padding: 7px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.empty {
+  background: white;
+  border: 1px dashed #ccd3e1;
+  padding: 45px 15px;
+  text-align: center;
+  border-radius: 15px;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.empty div { font-size: 36px; margin-bottom: 10px; }
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+}
+
+@media(max-width: 850px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .hero-icon { font-size: 70px; }
+}
+
+@media(max-width: 550px) {
+  header { padding: 17px 5%; }
+  main { padding: 30px 15px; }
+  .hero { padding: 30px 24px; }
+  .hero-icon { display: none; }
+  .stats { gap: 8px; }
+  .stat { padding: 15px 10px; }
+  .stat .number { font-size: 23px; }
+  .stat p { font-size: 10px; }
+  .items-grid { grid-template-columns: 1fr; }
+  .section-heading h2 { font-size: 23px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">find<span>ly.</span></div>
+  <div class="header-tag">Your campus, connected.</div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Campus Lost & Found Portal</div>
+      <h1>Lost something?<br>Found something?</h1>
+      <p>Every lost item has a story. Help it find its way home. Connect with fellow students and make your campus a little more helpful.</p>
+    </div>
+    <div class="hero-icon">🔎</div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="number" id="totalCount">0</div>
+      <p>Total reports</p>
+    </div>
+    <div class="stat">
+      <div class="number" id="lostCount">0</div>
+      <p>Items lost</p>
+    </div>
+    <div class="stat">
+      <div class="number" id="foundCount">0</div>
+      <p>Items found</p>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <div>
+      <h2>Campus item board</h2>
+      <p>Report an item or help someone find theirs.</p>
+    </div>
+  </div>
+
+  <section class="content-grid">
+
+    <div class="panel">
+      <h3>＋ Create a report</h3>
+
+      <form id="itemForm">
+
+        <label for="type">Report type</label>
+        <select id="type" required>
+          <option value="Lost">I lost something</option>
+          <option value="Found">I found something</option>
+        </select>
+
+        <label for="itemName">Item name</label>
+        <input id="itemName" placeholder="e.g. Black water bottle" required maxlength="55">
+
+        <label for="category">Category</label>
+        <select id="category" required>
+          <option value="Electronics">Electronics</option>
+          <option value="Books & Stationery">Books & Stationery</option>
+          <option value="Accessories">Accessories</option>
+          <option value="ID & Cards">ID & Cards</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="location">Campus location</label>
+        <input id="location" placeholder="e.g. Library, Block A" required maxlength="70">
+
+        <label for="date">Date</label>
+        <input id="date" type="date" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Describe the item..." required maxlength="250"></textarea>
+
+        <label for="contact">Contact information</label>
+        <input id="contact" placeholder="Email or phone number" required maxlength="90">
+
+        <button class="primary-btn submit-btn" type="submit">Publish report →</button>
+
+      </form>
+    </div>
+
+    <div class="items-area">
+
+      <div class="toolbar">
+        <input class="search" id="searchInput" placeholder="⌕ Search items or locations...">
+        <select id="categoryFilter" style="max-width:155px">
+          <option value="All">All categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Books & Stationery">Books & Stationery</option>
+          <option value="Accessories">Accessories</option>
+          <option value="ID & Cards">ID & Cards</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="filters">
+        <button class="filter active" data-filter="All">All items</button>
+        <button class="filter" data-filter="Lost">Lost</button>
+        <button class="filter" data-filter="Found">Found</button>
+      </div>
+
+      <div class="items-grid" id="itemsGrid"></div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Findly Campus Portal · Built for a smarter, more connected campus 💙
+</footer>
+
+<script>
+const STORAGE_KEY = "findlyCampusReports";
+
+const emojis = {
+  "Electronics": "🎧",
+  "Books & Stationery": "📚",
+  "Accessories": "🎒",
+  "ID & Cards": "🪪",
+  "Clothing": "🧥",
+  "Other": "📦"
+};
+
+let items = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+let currentFilter = "All";
+
+const form = document.getElementById("itemForm");
+const grid = document.getElementById("itemsGrid");
+
+function saveItems() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
+
+function safe(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function updateStats() {
+  document.getElementById("totalCount").textContent = items.length;
+  document.getElementById("lostCount").textContent =
+    items.filter(item => item.type === "Lost").length;
+  document.getElementById("foundCount").textContent =
+    items.filter(item => item.type === "Found").length;
+}
+
+function renderItems() {
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+
+  const filtered = items.filter(item => {
+    const matchesType =
+      currentFilter === "All" || item.type === currentFilter;
+
+    const matchesCategory =
+      category === "All" || item.category === category;
+
+    const matchesSearch =
+      (item.name + " " + item.location + " " + item.description)
+      .toLowerCase().includes(search);
+
+    return matchesType && matchesCategory && matchesSearch;
+  });
+
+  updateStats();
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty">
+        <div>🔍</div>
+        <strong>No reports found</strong>
+        <p style="font-size:12px;margin-top:7px">
+          Try another search or publish a new report.
+        </p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(item => `
+    <article class="item-card">
+      <div class="item-top">
+        <span class="item-emoji">${emojis[item.category] || "📦"}</span>
+        <span class="status ${item.type.toLowerCase()}">
+          ${safe(item.type)}
+        </span>
+      </div>
+
+      <h4>${safe(item.name)}</h4>
+
+      <p class="description">${safe(item.description)}</p>
+
+      <div class="item-meta">
+        📍 ${safe(item.location)}<br>
+        📅 ${safe(item.date)}<br>
+        🏷️ ${safe(item.category)}<br>
+        <span class="contact">✉ ${safe(item.contact)}</span>
+      </div>
+
+      <button class="delete-btn" data-delete="${safe(item.id)}">
+        Delete report
+      </button>
+    </article>
+  `).join("");
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const newItem = {
+    id: crypto.randomUUID(),
+    type: document.getElementById("type").value,
+    name: document.getElementById("itemName").value.trim(),
+    category: document.getElementById("category").value,
+    location: document.getElementById("location").value.trim(),
+    date: document.getElementById("date").value,
+    description: document.getElementById("description").value.trim(),
+    contact: document.getElementById("contact").value.trim()
+  };
+
+  items.unshift(newItem);
+  saveItems();
+  renderItems();
+
+  form.reset();
+  document.getElementById("date").value =
+    new Date().toISOString().slice(0, 10);
+
+  alert("Your report has been published successfully!");
+});
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+
+    document.querySelectorAll(".filter").forEach(btn =>
+      btn.classList.remove("active")
+    );
+
+    button.classList.add("active");
+    renderItems();
+  });
+});
+
+document.getElementById("searchInput")
+  .addEventListener("input", renderItems);
+
+document.getElementById("categoryFilter")
+  .addEventListener("change", renderItems);
+
+grid.addEventListener("click", function(event) {
+  const button = event.target.closest("[data-delete]");
+  if (!button) return;
+
+  const id = button.dataset.delete;
+
+  if (confirm("Are you sure you want to delete this report?")) {
+    items = items.filter(item => item.id !== id);
+    saveItems();
+    renderItems();
+  }
+});
+
+document.getElementById("date").value =
+  new Date().toISOString().slice(0, 10);
+
+renderItems();
+</script>
+
+</body>
+</html>
